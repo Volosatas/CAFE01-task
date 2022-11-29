@@ -1,8 +1,14 @@
-import './App.css';
+import "./App.scss";
+import "./styles/styles.js";
+import { Header } from "./components/Header";
+import { AttendeeCreator } from "./components/AttendeeCreator";
 
 function App() {
   return (
-    <div>Hello World</div>
+    <>
+      <Header />
+      <AttendeeCreator />
+    </>
   );
 }
 

@@ -1,0 +1,24 @@
+.header {
+  max-width: 100%;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  background-image: url(../images/header.jpg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  &__middle {
+    margin: 0 auto;
+    max-width: 50%;
+    background: rgba(0, 166, 255, 0.5);
+    text-align: center;
+    padding: 20px 70px;
+    border-radius: 5px;
+
+    &--title {
+      all: unset;
+      font-weight: 500;
+    }
+  }
+}

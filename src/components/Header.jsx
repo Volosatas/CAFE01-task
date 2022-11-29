@@ -1,7 +1,12 @@
 export function Header() {
   return (
-    <header>
-      <h1 className="header">Management Dashboard</h1>
+    <header className="header">
+      <div className="header__middle">
+        <h1 className="header__middle--title">
+          Management
+          <br /> Dashboard
+        </h1>
+      </div>
     </header>
   );
 }
