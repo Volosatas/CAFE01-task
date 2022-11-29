@@ -1,3 +1,3 @@
-import "./header.scss";
-import "./attendeeCreator.scss";
-import "./attendeeList.scss";
+import "./Header.scss";
+import "./AttendeeCreator.scss";
+import "./AttendeeList.scss";

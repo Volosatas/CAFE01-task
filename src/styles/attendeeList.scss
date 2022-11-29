@@ -1,0 +1,12 @@
+.attendeesList {
+  background-color: white;
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 90%;
+  border: 1px solid grey;
+  border-radius: 5px;
+
+  &__title {
+    margin-bottom: 10px;
+  }
+}
