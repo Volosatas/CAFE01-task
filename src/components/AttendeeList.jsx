@@ -30,27 +30,33 @@ export function AttendeeList() {
     <div className="attendeesList">
       <h4 className="attendeesList__title">Event Guest List</h4>
       <Table className="attendeesList__table">
-        <tr>
-          <th>#</th>
-          <th>Name</th>
-          <th>Age</th>
-          <th>Email</th>
-        </tr>
-
-        {attendees.map((attendee, i) => {
-          return (
-            <tr>
-              <td>{i + 1}.</td>
-              <td>
-                {attendee.firstName} {attendee.lastName}
-              </td>
-              <td>{attendee.age}</td>
-              <td>{attendee.email}</td>
-              <Button variant="primary">Edit</Button>
-              <Button variant="danger">Del</Button>
-            </tr>
-          );
-        })}
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Email</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {attendees.map((attendee, i) => {
+            return (
+              <tr>
+                <td>{i + 1}.</td>
+                <td>
+                  {attendee.firstName} {attendee.lastName}
+                </td>
+                <td>{attendee.age}</td>
+                <td>{attendee.email}</td>
+                <td>
+                  <Button variant="primary">Edit</Button>
+                  <Button variant="danger">Del</Button>
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
       </Table>
     </div>
   );
