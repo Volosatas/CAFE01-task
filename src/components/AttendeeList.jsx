@@ -1,23 +1,25 @@
+import React, { useState } from "react";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
+import uuid from "react-uuid";
 
-const attendees = [
+const guests = [
   {
-    id: 1,
+    id: uuid(),
     firstName: "Vilius",
     lastName: "Garba",
     age: 28,
     email: "vilius.garba@gmail.com",
   },
   {
-    id: 2,
+    id: uuid(),
     firstName: "Neda",
     lastName: "Pukytė",
     age: 26,
     email: "neda.pukyte@gmail.com",
   },
   {
-    id: 3,
+    id: uuid(),
     firstName: "Lars",
     lastName: "Ulrich",
     age: 666,
@@ -26,6 +28,15 @@ const attendees = [
 ];
 
 export function AttendeeList() {
+  const [attendees, setAttendees] = useState(guests);
+
+  const handleOnDelete = (attendeeID) => {
+    const filteredAtendees = attendees.filter(
+      (attendee) => attendee.id !== attendeeID
+    );
+    setAttendees(filteredAtendees);
+  };
+
   return (
     <div className="attendeesList">
       <h4 className="attendeesList__title">Event Guest List</h4>
@@ -42,7 +53,7 @@ export function AttendeeList() {
         <tbody>
           {attendees.map((attendee, i) => {
             return (
-              <tr>
+              <tr key={attendee.id}>
                 <td>{i + 1}.</td>
                 <td>
                   {attendee.firstName} {attendee.lastName}
@@ -51,7 +62,12 @@ export function AttendeeList() {
                 <td>{attendee.email}</td>
                 <td>
                   <Button variant="primary">Edit</Button>
-                  <Button variant="danger">Del</Button>
+                  <Button
+                    variant="danger"
+                    onClick={() => handleOnDelete(attendee.id)}
+                  >
+                    Del
+                  </Button>
                 </td>
               </tr>
             );

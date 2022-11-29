@@ -7,15 +7,25 @@ export function AttendeeCreator() {
       <div className="creator__tittle">
         <h2>Create Attendee</h2>
       </div>
-      <div className="creator__form">
-        <Form.Control type="text" placeholder="First Name" />
-        <Form.Control type="text" placeholder="Last Name" />
-        <Form.Control type="number" placeholder="Age" />
-        <Form.Control type="email" placeholder="Email" />
+      <form className="creator__form">
+        <Form.Control
+          type="text"
+          name="firstName"
+          placeholder="First Name"
+          required
+        />
+        <Form.Control
+          type="text"
+          name="lastName"
+          placeholder="Last Name"
+          required
+        />
+        <Form.Control type="number" name="age" placeholder="Age" required />
+        <Form.Control type="email" name="email" placeholder="Email" required />
         <Button variant="primary" type="submit">
           Submit
         </Button>
-      </div>
+      </form>
     </div>
   );
 }
