@@ -1,15 +1,12 @@
-// import React, { useState } from "react";
 import Table from "react-bootstrap/Table";
-// import Button from "react-bootstrap/Button";
 import { AttendeeRowStatic } from "./AttendeeRowStatic";
 import { AttendeeRowEditable } from "./AttendeeRowEditable";
-// import uuid from "react-uuid";
 
 export function AttendeeList(props) {
   return (
     <div className="attendeesList">
       <h4 className="attendeesList__title">Event Guest List</h4>
-      <form action="">
+      <form onSubmit={(e) => props.handleEditSubmit(e)}>
         <Table className="attendeesList__table">
           <thead>
             <tr>

@@ -38,7 +38,7 @@ export function Dashboard() {
 
   const [attendees, setAttendees] = useState(guests);
   const [newAttendee, setNewAttendee] = useState({
-    id: "",
+    id: uuid(),
     firstName: "",
     lastName: "",
     age: "",
@@ -46,41 +46,18 @@ export function Dashboard() {
   });
   const [editedAttendee, setEditedAttendee] = useState(null);
   const [editFormData, setEditFormData] = useState({
+    id: "",
     firstName: "",
     lastName: "",
     age: "",
     email: "",
   });
 
-  const handleEditBtn = (editedAttendee) => {
-    setEditedAttendee(editedAttendee.id);
-    setEditFormData({
-      firstName: editedAttendee.firstName,
-      lastName: editedAttendee.lastName,
-      age: editedAttendee.age,
-      email: editedAttendee.email,
-    });
-  };
-
-  const handleDeleteBtn = (attendeeId) => {
-    const filteredAttendees = attendees.filter(
-      (attendee) => attendee.id !== attendeeId
-    );
-    setAttendees(filteredAttendees);
-  };
-
-  const handleInputChange = (e) => {
+  const handleCreateInputChange = (e) => {
     const inputName = e.target.name;
     const inputValue = e.target.value;
 
     setNewAttendee({ ...newAttendee, [inputName]: inputValue });
-  };
-
-  const handleEditInputChange = (e) => {
-    const editInputName = e.target.name;
-    const editInputValue = e.target.value;
-
-    setEditFormData({ ...editFormData, [editInputName]: editInputValue });
   };
 
   const handleCreateFormSubmit = (e) => {
@@ -95,12 +72,45 @@ export function Dashboard() {
     });
   };
 
+  const handleEditBtn = (editedAttendee) => {
+    setEditedAttendee(editedAttendee.id);
+    setEditFormData({ ...editedAttendee });
+  };
+
+  const handleEditInputChange = (e) => {
+    const editInputName = e.target.name;
+    const editInputValue = e.target.value;
+
+    setEditFormData({ ...editFormData, [editInputName]: editInputValue });
+  };
+
+  const handleEditSubmit = (e) => {
+    e.preventDefault();
+
+    const newAttendees = [...attendees];
+    const index = attendees.findIndex(
+      (attendee) => attendee.id === editFormData.id
+    );
+
+    newAttendees[index] = { ...editFormData };
+
+    setAttendees(newAttendees);
+    setEditedAttendee(null);
+  };
+
+  const handleDeleteBtn = (attendeeId) => {
+    const filteredAttendees = attendees.filter(
+      (attendee) => attendee.id !== attendeeId
+    );
+    setAttendees(filteredAttendees);
+  };
+
   return (
     <>
       <Header />
       <AttendeeCreator
         newAttendee={newAttendee}
-        handleInputChange={handleInputChange}
+        handleCreateInputChange={handleCreateInputChange}
         handleCreateFormSubmit={handleCreateFormSubmit}
       />
       <AttendeeList
@@ -109,6 +119,7 @@ export function Dashboard() {
         editedAttendee={editedAttendee}
         handleEditBtn={handleEditBtn}
         handleEditInputChange={handleEditInputChange}
+        handleEditSubmit={handleEditSubmit}
         editFormData={editFormData}
       />
     </>
