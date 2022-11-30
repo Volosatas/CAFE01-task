@@ -1,3 +1,7 @@
 export function NoAttendees() {
-  return <h1>Your event has no guests yet</h1>;
+  return (
+    <div className="noAttendeesBox">
+      <h1 className="noAttendeesBox__title">Your event has no guests yet</h1>;
+    </div>
+  );
 }

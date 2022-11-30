@@ -1,6 +1,7 @@
 import Table from "react-bootstrap/Table";
 import { AttendeeRowStatic } from "./AttendeeRowStatic";
 import { AttendeeRowEditable } from "./AttendeeRowEditable";
+import { Fragment } from "react";
 
 export function AttendeeList(props) {
   return (
@@ -20,7 +21,7 @@ export function AttendeeList(props) {
           <tbody>
             {props.attendees.map((attendee, i) => {
               return (
-                <>
+                <Fragment key={attendee.id}>
                   {props.editedAttendee === attendee.id ? (
                     <AttendeeRowEditable
                       editFormData={props.editFormData}
@@ -29,14 +30,13 @@ export function AttendeeList(props) {
                     />
                   ) : (
                     <AttendeeRowStatic
-                      key={attendee.id}
                       attendee={attendee}
                       i={i}
                       handleDeleteBtn={props.handleDeleteBtn}
                       handleEditBtn={props.handleEditBtn}
                     />
                   )}
-                </>
+                </Fragment>
               );
             })}
           </tbody>

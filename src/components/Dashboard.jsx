@@ -105,6 +105,7 @@ export function Dashboard() {
     );
     setAttendees(filteredAttendees);
   };
+  
   const handleCancelBtn = () => {
     setEditedAttendee(null);
   };
