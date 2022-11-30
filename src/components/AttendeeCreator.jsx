@@ -10,13 +10,13 @@ export function AttendeeCreator(props) {
       <div className="creator__tittle">
         <h2>Create Attendee</h2>
       </div>
-      <form className="creator__form" onSubmit={props.handleFormSubmit}>
+      <form className="creator__form" onSubmit={props.handleCreateFormSubmit}>
         <Form.Control
           type="text"
           name="firstName"
           placeholder="First Name"
           required
-          value={props.attendee.firstName}
+          value={props.newAttendee.firstName}
           onChange={(e) => props.handleInputChange(e)}
         />
         <Form.Control
@@ -24,7 +24,7 @@ export function AttendeeCreator(props) {
           name="lastName"
           placeholder="Last Name"
           required
-          value={props.attendee.lastName}
+          value={props.newAttendee.lastName}
           onChange={(e) => props.handleInputChange(e)}
         />
         <Form.Control
@@ -32,7 +32,7 @@ export function AttendeeCreator(props) {
           name="age"
           placeholder="Age"
           required
-          value={props.attendee.age}
+          value={props.newAttendee.age}
           onChange={(e) => props.handleInputChange(e)}
         />
         <Form.Control
@@ -40,7 +40,7 @@ export function AttendeeCreator(props) {
           name="email"
           placeholder="Email"
           required
-          value={props.attendee.email}
+          value={props.newAttendee.email}
           onChange={(e) => props.handleInputChange(e)}
         />
         <Button variant="primary" type="submit">

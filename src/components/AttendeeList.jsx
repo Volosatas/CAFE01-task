@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+// import React, { useState } from "react";
 import Table from "react-bootstrap/Table";
 // import Button from "react-bootstrap/Button";
 import { AttendeeRowStatic } from "./AttendeeRowStatic";
@@ -25,7 +25,10 @@ export function AttendeeList(props) {
               return (
                 <>
                   {props.editedAttendee === attendee.id ? (
-                    <AttendeeRowEditable />
+                    <AttendeeRowEditable
+                      editFormData={props.editFormData}
+                      handleEditInputChange={props.handleEditInputChange}
+                    />
                   ) : (
                     <AttendeeRowStatic
                       key={attendee.id}

@@ -12,7 +12,7 @@ export function AttendeeRowStatic(props) {
       <td>
         <Button
           variant="primary"
-          onClick={() => props.handleEditBtn(props.attendee.id)}
+          onClick={() => props.handleEditBtn(props.attendee)}
         >
           Edit
         </Button>

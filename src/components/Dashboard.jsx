@@ -37,37 +37,56 @@ export function Dashboard() {
   ];
 
   const [attendees, setAttendees] = useState(guests);
-  const [attendee, setAttendee] = useState({
-    id: uuid(),
+  const [newAttendee, setNewAttendee] = useState({
+    id: "",
     firstName: "",
     lastName: "",
     age: "",
     email: "",
   });
   const [editedAttendee, setEditedAttendee] = useState(null);
+  const [editFormData, setEditFormData] = useState({
+    firstName: "",
+    lastName: "",
+    age: "",
+    email: "",
+  });
 
-  const handleEditBtn = (editedAttendeeID) => {
-    setEditedAttendee(editedAttendeeID);
+  const handleEditBtn = (editedAttendee) => {
+    setEditedAttendee(editedAttendee.id);
+    setEditFormData({
+      firstName: editedAttendee.firstName,
+      lastName: editedAttendee.lastName,
+      age: editedAttendee.age,
+      email: editedAttendee.email,
+    });
   };
 
-  const handleDeleteBtn = (attendeeID) => {
+  const handleDeleteBtn = (attendeeId) => {
     const filteredAttendees = attendees.filter(
-      (attendee) => attendee.id !== attendeeID
+      (attendee) => attendee.id !== attendeeId
     );
     setAttendees(filteredAttendees);
   };
 
   const handleInputChange = (e) => {
-    const inputID = e.target.name;
+    const inputName = e.target.name;
     const inputValue = e.target.value;
 
-    setAttendee({ ...attendee, [inputID]: inputValue });
+    setNewAttendee({ ...newAttendee, [inputName]: inputValue });
   };
 
-  const handleFormSubmit = (e) => {
+  const handleEditInputChange = (e) => {
+    const editInputName = e.target.name;
+    const editInputValue = e.target.value;
+
+    setEditFormData({ ...editFormData, [editInputName]: editInputValue });
+  };
+
+  const handleCreateFormSubmit = (e) => {
     e.preventDefault();
-    setAttendees([...attendees, attendee]);
-    setAttendee({
+    setAttendees([...attendees, newAttendee]);
+    setNewAttendee({
       id: uuid(),
       firstName: "",
       lastName: "",
@@ -80,15 +99,17 @@ export function Dashboard() {
     <>
       <Header />
       <AttendeeCreator
-        attendee={attendee}
+        newAttendee={newAttendee}
         handleInputChange={handleInputChange}
-        handleFormSubmit={handleFormSubmit}
+        handleCreateFormSubmit={handleCreateFormSubmit}
       />
       <AttendeeList
         attendees={attendees}
         handleDeleteBtn={handleDeleteBtn}
         editedAttendee={editedAttendee}
         handleEditBtn={handleEditBtn}
+        handleEditInputChange={handleEditInputChange}
+        editFormData={editFormData}
       />
     </>
   );
