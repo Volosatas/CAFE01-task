@@ -43,7 +43,9 @@ export function AttendeeRowEditable(props) {
         <Button type="submit" variant="warning">
           Save
         </Button>
-        <Button variant="danger">Cancel</Button>
+        <Button variant="danger" onClick={props.handleCancelBtn}>
+          Cancel
+        </Button>
       </td>
     </tr>
   );

@@ -104,6 +104,9 @@ export function Dashboard() {
     );
     setAttendees(filteredAttendees);
   };
+  const handleCancelBtn = () => {
+    setEditedAttendee(null);
+  };
 
   return (
     <>
@@ -115,12 +118,13 @@ export function Dashboard() {
       />
       <AttendeeList
         attendees={attendees}
-        handleDeleteBtn={handleDeleteBtn}
         editedAttendee={editedAttendee}
+        editFormData={editFormData}
+        handleDeleteBtn={handleDeleteBtn}
+        handleCancelBtn={handleCancelBtn}
         handleEditBtn={handleEditBtn}
         handleEditInputChange={handleEditInputChange}
         handleEditSubmit={handleEditSubmit}
-        editFormData={editFormData}
       />
     </>
   );

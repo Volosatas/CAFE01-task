@@ -25,6 +25,7 @@ export function AttendeeList(props) {
                     <AttendeeRowEditable
                       editFormData={props.editFormData}
                       handleEditInputChange={props.handleEditInputChange}
+                      handleCancelBtn={props.handleCancelBtn}
                     />
                   ) : (
                     <AttendeeRowStatic
