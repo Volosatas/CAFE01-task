@@ -52,21 +52,33 @@ export function Dashboard() {
     setAttendees(filteredAttendees);
   };
 
-  const onInputChange = (firstName, lastName, age, email) => {
-    console.log(attendee);
+  const handleInputChange = (e) => {
+    const inputID = e.target.name;
+    const inputValue = e.target.value;
+
+    setAttendee({ ...attendee, [inputID]: inputValue });
+  };
+
+  const handleSubmitBtn = (e) => {
+    e.preventDefault();
+    setAttendees([...attendees, attendee]);
     setAttendee({
       id: uuid(),
-      firstName: firstName,
-      lastName: lastName,
-      age: age,
-      email: email,
+      firstName: "",
+      lastName: "",
+      age: "",
+      email: "",
     });
   };
 
   return (
     <>
       <Header />
-      <AttendeeCreator attendee={attendee} onInputChange={onInputChange} />
+      <AttendeeCreator
+        attendee={attendee}
+        handleInputChange={handleInputChange}
+        handleSubmitBtn={handleSubmitBtn}
+      />
       <AttendeeList attendees={attendees} handleDeleteBtn={handleDeleteBtn} />
     </>
   );

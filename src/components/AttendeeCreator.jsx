@@ -5,12 +5,6 @@ import Form from "react-bootstrap/Form";
 // import uuid from "react-uuid";
 
 export function AttendeeCreator(props) {
-  // const handleInputChange = useCallback(
-  //   (e) => {
-  //     onNameChange(e.target.value);
-  //   },
-  //   [onInputChange]
-  // );
 
   return (
     <div className="creator">
@@ -24,7 +18,7 @@ export function AttendeeCreator(props) {
           placeholder="First Name"
           required
           value={props.attendee.firstName}
-          onChange={(e) => props.onInputChange(e.target.value)}
+          onChange={(e) => props.handleInputChange(e)}
         />
         <Form.Control
           type="text"
@@ -32,7 +26,7 @@ export function AttendeeCreator(props) {
           placeholder="Last Name"
           required
           value={props.attendee.lastName}
-          onChange={(e) => props.onInputChange(e.target.value)}
+          onChange={(e) => props.handleInputChange(e)}
         />
         <Form.Control
           type="number"
@@ -40,7 +34,7 @@ export function AttendeeCreator(props) {
           placeholder="Age"
           required
           value={props.attendee.age}
-          onChange={(e) => props.onInputChange(e.target.value)}
+          onChange={(e) => props.handleInputChange(e)}
         />
         <Form.Control
           type="email"
@@ -48,9 +42,13 @@ export function AttendeeCreator(props) {
           placeholder="Email"
           required
           value={props.attendee.email}
-          onChange={(e) => props.onInputChange(e.target.value)}
+          onChange={(e) => props.handleInputChange(e)}
         />
-        <Button variant="primary" type="submit">
+        <Button
+          variant="primary"
+          type="submit"
+          onClick={props.handleSubmitBtn}
+        >
           Submit
         </Button>
       </form>
