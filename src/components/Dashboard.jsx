@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Header } from "./Header";
 import { AttendeeCreator } from "./AttendeeCreator";
 import { AttendeeList } from "./AttendeeList";
+import { NoAttendees } from "./NoAttendees";
 import uuid from "react-uuid";
 
 export function Dashboard() {
@@ -116,16 +117,20 @@ export function Dashboard() {
         handleCreateInputChange={handleCreateInputChange}
         handleCreateFormSubmit={handleCreateFormSubmit}
       />
-      <AttendeeList
-        attendees={attendees}
-        editedAttendee={editedAttendee}
-        editFormData={editFormData}
-        handleDeleteBtn={handleDeleteBtn}
-        handleCancelBtn={handleCancelBtn}
-        handleEditBtn={handleEditBtn}
-        handleEditInputChange={handleEditInputChange}
-        handleEditSubmit={handleEditSubmit}
-      />
+      {attendees.length > 0 ? (
+        <AttendeeList
+          attendees={attendees}
+          editedAttendee={editedAttendee}
+          editFormData={editFormData}
+          handleDeleteBtn={handleDeleteBtn}
+          handleCancelBtn={handleCancelBtn}
+          handleEditBtn={handleEditBtn}
+          handleEditInputChange={handleEditInputChange}
+          handleEditSubmit={handleEditSubmit}
+        />
+      ) : (
+        <NoAttendees />
+      )}
     </>
   );
 }
