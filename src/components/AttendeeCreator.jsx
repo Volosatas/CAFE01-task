@@ -5,13 +5,12 @@ import Form from "react-bootstrap/Form";
 // import uuid from "react-uuid";
 
 export function AttendeeCreator(props) {
-
   return (
     <div className="creator">
       <div className="creator__tittle">
         <h2>Create Attendee</h2>
       </div>
-      <form className="creator__form">
+      <form className="creator__form" onSubmit={props.handleFormSubmit}>
         <Form.Control
           type="text"
           name="firstName"
@@ -44,11 +43,7 @@ export function AttendeeCreator(props) {
           value={props.attendee.email}
           onChange={(e) => props.handleInputChange(e)}
         />
-        <Button
-          variant="primary"
-          type="submit"
-          onClick={props.handleSubmitBtn}
-        >
+        <Button variant="primary" type="submit">
           Submit
         </Button>
       </form>

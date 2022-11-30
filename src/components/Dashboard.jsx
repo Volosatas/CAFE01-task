@@ -59,7 +59,7 @@ export function Dashboard() {
     setAttendee({ ...attendee, [inputID]: inputValue });
   };
 
-  const handleSubmitBtn = (e) => {
+  const handleFormSubmit = (e) => {
     e.preventDefault();
     setAttendees([...attendees, attendee]);
     setAttendee({
@@ -77,7 +77,7 @@ export function Dashboard() {
       <AttendeeCreator
         attendee={attendee}
         handleInputChange={handleInputChange}
-        handleSubmitBtn={handleSubmitBtn}
+        handleFormSubmit={handleFormSubmit}
       />
       <AttendeeList attendees={attendees} handleDeleteBtn={handleDeleteBtn} />
     </>
