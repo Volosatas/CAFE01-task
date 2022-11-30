@@ -10,7 +10,12 @@ export function AttendeeRowStatic(props) {
       <td>{props.attendee.age}</td>
       <td>{props.attendee.email}</td>
       <td>
-        <Button variant="primary">Edit</Button>
+        <Button
+          variant="primary"
+          onClick={() => props.handleEditBtn(props.attendee.id)}
+        >
+          Edit
+        </Button>
         <Button
           variant="danger"
           onClick={() => props.handleDeleteBtn(props.attendee.id)}

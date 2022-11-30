@@ -44,6 +44,11 @@ export function Dashboard() {
     age: "",
     email: "",
   });
+  const [editedAttendee, setEditedAttendee] = useState(null);
+
+  const handleEditBtn = (editedAttendeeID) => {
+    setEditedAttendee(editedAttendeeID);
+  };
 
   const handleDeleteBtn = (attendeeID) => {
     const filteredAttendees = attendees.filter(
@@ -79,7 +84,12 @@ export function Dashboard() {
         handleInputChange={handleInputChange}
         handleFormSubmit={handleFormSubmit}
       />
-      <AttendeeList attendees={attendees} handleDeleteBtn={handleDeleteBtn} />
+      <AttendeeList
+        attendees={attendees}
+        handleDeleteBtn={handleDeleteBtn}
+        editedAttendee={editedAttendee}
+        handleEditBtn={handleEditBtn}
+      />
     </>
   );
 }
