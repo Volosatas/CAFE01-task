@@ -1,5 +1,6 @@
 import Table from "react-bootstrap/Table";
-import Button from "react-bootstrap/Button";
+// import Button from "react-bootstrap/Button";
+import { AttendeeRowStatic } from "./AttendeeRowStatic";
 
 export function AttendeeList(props) {
   return (
@@ -18,23 +19,12 @@ export function AttendeeList(props) {
         <tbody>
           {props.attendees.map((attendee, i) => {
             return (
-              <tr key={attendee.id}>
-                <td>{i + 1}.</td>
-                <td>
-                  {attendee.firstName} {attendee.lastName}
-                </td>
-                <td>{attendee.age}</td>
-                <td>{attendee.email}</td>
-                <td>
-                  <Button variant="primary">Edit</Button>
-                  <Button
-                    variant="danger"
-                    onClick={() => props.handleDeleteBtn(attendee.id)}
-                  >
-                    Del
-                  </Button>
-                </td>
-              </tr>
+              <AttendeeRowStatic
+                key={attendee.id}
+                attendee={attendee}
+                i={i}
+                handleDeleteBtn={props.handleDeleteBtn}
+              />
             );
           })}
         </tbody>
