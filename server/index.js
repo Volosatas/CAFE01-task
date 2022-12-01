@@ -2,9 +2,17 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const fs = require("fs");
 const cors = require("cors");
+const sqlite3 = require("sqlite3").verbose();
 
 const app = express();
 const port = 3005;
+
+let db = new sqlite3.Database("data/event-app-db.db", (err) => {
+  if (err) {
+    return console.error(err.message);
+  }
+  console.log("Connected to the in-memory SQlite database.");
+});
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -20,6 +28,10 @@ app.get("/attendees", (req, res) => {
   JSON.parse(attendees);
   res.send(attendees);
 });
+
+// const sqlQuery =
+//   "CREATE TABLE attendees (id TEXT PRIMARY KEY UNIQUE NOT NULL, firstName TEXT NOT NULL, lastName TEXT NOT NULL, age INTEGER NOT NULL, email TEXT NOT NULL)";
+// db.run(sqlQuery);
 
 app.post("/attendees", (req, res) => {
   const attendees = fs.readFileSync("data/attendees.json", "utf8");
@@ -76,5 +88,5 @@ app.put("/attendees/:id", (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+  console.log(`App listening on port - ${port}`);
 });
