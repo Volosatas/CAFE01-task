@@ -77,7 +77,7 @@ export function Dashboard() {
     setEditFormData({ ...editFormData, [editInputName]: editInputValue });
   };
 
-  const handleEditSubmit = (e) => {
+  const handleEditSubmit = async (e) => {
     e.preventDefault();
 
     const newAttendees = [...attendees];
@@ -88,6 +88,16 @@ export function Dashboard() {
     newAttendees[index] = { ...editFormData };
 
     setAttendees(newAttendees);
+
+    await fetch(`http://localhost:3005/attendees/${editedAttendee}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(editFormData),
+    });
+    console.log(editedAttendee);
+
     setEditedAttendee(null);
   };
 

@@ -46,7 +46,6 @@ app.delete("/attendees/:id", (req, res) => {
   const { id } = req.params;
   const data = fs.readFileSync("data/attendees.json", "utf-8");
   const jsonData = JSON.parse(data);
-
   const filteredData = jsonData.filter((attendee) => attendee.id !== id);
 
   fs.writeFileSync(
@@ -54,8 +53,26 @@ app.delete("/attendees/:id", (req, res) => {
     JSON.stringify(filteredData, null, 2),
     "utf-8"
   );
-  console.log(filteredData);
+
   res.send(filteredData);
+});
+
+app.put("/attendees/:id", (req, res) => {
+  const { id } = req.params;
+  const newAttendee = req.body;
+  const data = fs.readFileSync("data/attendees.json", "utf-8");
+  const jsonData = JSON.parse(data);
+  const index = jsonData.findIndex((attendee) => attendee.id === id);
+
+  jsonData[index] = newAttendee;
+
+  fs.writeFileSync(
+    "data/attendees.json",
+    JSON.stringify(jsonData, null, 2),
+    "utf-8"
+  );
+
+  res.send(newAttendee);
 });
 
 app.listen(port, () => {
