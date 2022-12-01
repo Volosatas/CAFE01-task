@@ -1,4 +1,5 @@
-[{
+[
+  {
     "id": "63dd34e6-8e55-590d-34be-204394c03693",
     "firstName": "Vilius",
     "lastName": "Garba",
@@ -18,11 +19,5 @@
     "lastName": "Ulrich",
     "age": 666,
     "email": "lars@gmail.com"
-  },
-  {
-    "id": 1,
-    "firstName": "sudoku",
-    "lastName": "pie",
-    "age": 78,
-    "email": "myman@hotline.com"
-  }]
+  }
+]

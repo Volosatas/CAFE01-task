@@ -21,6 +21,27 @@ app.get("/attendees", (req, res) => {
   res.send(attendees);
 });
 
+app.post("/attendees", (req, res) => {
+  const attendees = fs.readFileSync("data/attendees.json", "utf8");
+  const attendeesArr = JSON.parse(attendees);
+
+  const newAttendee = {
+    id: req.body.id,
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    age: req.body.age,
+    email: req.body.email,
+  };
+  const newAttendeesArr = [...attendeesArr, newAttendee];
+
+  fs.writeFileSync(
+    "data/attendees.json",
+    JSON.stringify(newAttendeesArr, null, 2)
+  );
+
+  res.json(newAttendeesArr);
+});
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });

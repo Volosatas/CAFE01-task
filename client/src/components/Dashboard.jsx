@@ -27,8 +27,8 @@ export function Dashboard() {
   useEffect(() => {
     const fetchAttendees = async () => {
       const response = await fetch("http://localhost:3005/attendees");
-      const attendees = await response.json();
-      setAttendees([...attendees]);
+      const data = await response.json();
+      setAttendees([...data]);
     };
     fetchAttendees();
   }, []);
@@ -40,9 +40,22 @@ export function Dashboard() {
     setNewAttendee({ ...newAttendee, [inputName]: inputValue });
   };
 
-  const handleCreateFormSubmit = (e) => {
+  const handleCreateFormSubmit = async (e) => {
     e.preventDefault();
+
     setAttendees([...attendees, newAttendee]);
+
+    const postNewUser = async () => {
+      const response = await fetch("http://localhost:3005/attendees", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newAttendee),
+      });
+    };
+    postNewUser();
+
     setNewAttendee({
       id: uuid(),
       firstName: "",
