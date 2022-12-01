@@ -11,7 +11,7 @@ let db = new sqlite3.Database("data/event-app-db.db", (err) => {
   if (err) {
     return console.error(err.message);
   }
-  console.log("Connected to the in-memory SQlite database.");
+  console.log("Connected to the event-app SQlite database.");
 });
 
 app.use(bodyParser.json());
@@ -24,35 +24,39 @@ app.get("/", (req, res) => {
 });
 
 app.get("/attendees", (req, res) => {
-  const attendees = fs.readFileSync("data/attendees.json", "utf8");
-  JSON.parse(attendees);
-  res.send(attendees);
+  let sql = "SELECT * FROM attendees";
+
+  db.all(sql, [], (err, rows) => {
+    if (err) {
+      throw err;
+    }
+    res.json(rows);
+  });
+
+  db.close();
 });
 
-// const sqlQuery =
-//   "CREATE TABLE attendees (id TEXT PRIMARY KEY UNIQUE NOT NULL, firstName TEXT NOT NULL, lastName TEXT NOT NULL, age INTEGER NOT NULL, email TEXT NOT NULL)";
-// db.run(sqlQuery);
+// app.post("/attendees", (req, res) => {
+//   const { id, firstName, lastName, age, email } = req.body;
 
-app.post("/attendees", (req, res) => {
-  const attendees = fs.readFileSync("data/attendees.json", "utf8");
-  const attendeesArr = JSON.parse(attendees);
+//   const newAttendeesArr = [...attendeesArr, newAttendee];
 
-  const newAttendee = {
-    id: req.body.id,
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
-    age: req.body.age,
-    email: req.body.email,
-  };
-  const newAttendeesArr = [...attendeesArr, newAttendee];
+//   // fs.writeFileSync(
+//   //   "data/attendees.json",
+//   //   JSON.stringify(newAttendeesArr, null, 2)
+//   // );
 
-  fs.writeFileSync(
-    "data/attendees.json",
-    JSON.stringify(newAttendeesArr, null, 2)
-  );
+//   const sqlQuery =
+//     "INSERT INTO attendees (id, firstName, lastName, age, email) VALUES (?,?,?,?,?)";
+//   db.run(sqlQuery, [id, firstName, lastName, age, email], (err) => {
+//     if (err) {
+//       console.log(err);
+//     }
+//     console.log("success");
+//   });
 
-  res.json(newAttendeesArr);
-});
+//   res.json(newAttendeesArr);
+// });
 
 app.delete("/attendees/:id", (req, res) => {
   const { id } = req.params;

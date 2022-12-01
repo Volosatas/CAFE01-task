@@ -28,6 +28,7 @@ export function Dashboard() {
     const fetchAttendees = async () => {
       const response = await fetch("http://localhost:3005/attendees");
       const data = await response.json();
+      console.log(data);
       setAttendees([...data]);
     };
     fetchAttendees();
