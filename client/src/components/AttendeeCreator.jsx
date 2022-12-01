@@ -14,7 +14,7 @@ export function AttendeeCreator(props) {
           placeholder="First Name"
           required
           value={props.newAttendee.firstName}
-          onChange={(e) => props.handleCreateInputChange(e)}
+          onChange={(e) => props.handleCreateFormInputChange(e)}
         />
         <Form.Control
           type="text"
@@ -22,7 +22,7 @@ export function AttendeeCreator(props) {
           placeholder="Last Name"
           required
           value={props.newAttendee.lastName}
-          onChange={(e) => props.handleCreateInputChange(e)}
+          onChange={(e) => props.handleCreateFormInputChange(e)}
         />
         <Form.Control
           type="number"
@@ -30,7 +30,7 @@ export function AttendeeCreator(props) {
           placeholder="Age"
           required
           value={props.newAttendee.age}
-          onChange={(e) => props.handleCreateInputChange(e)}
+          onChange={(e) => props.handleCreateFormInputChange(e)}
         />
         <Form.Control
           type="email"
@@ -38,7 +38,7 @@ export function AttendeeCreator(props) {
           placeholder="Email"
           required
           value={props.newAttendee.email}
-          onChange={(e) => props.handleCreateInputChange(e)}
+          onChange={(e) => props.handleCreateFormInputChange(e)}
         />
         <Button variant="primary" type="submit">
           Submit

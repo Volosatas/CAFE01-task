@@ -22,7 +22,7 @@ export function AttendeeList(props) {
             {props.attendees.map((attendee, i) => {
               return (
                 <Fragment key={attendee.id}>
-                  {props.editedAttendee === attendee.id ? (
+                  {props.editedAttendeeId === attendee.id ? (
                     <AttendeeRowEditable
                       editFormData={props.editFormData}
                       handleEditInputChange={props.handleEditInputChange}

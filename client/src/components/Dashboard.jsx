@@ -15,7 +15,7 @@ export function Dashboard() {
     age: "",
     email: "",
   });
-  const [editedAttendee, setEditedAttendee] = useState(null);
+  const [editedAttendeeId, setEditedAttendeeId] = useState(null);
   const [editFormData, setEditFormData] = useState({
     id: "",
     firstName: "",
@@ -33,7 +33,7 @@ export function Dashboard() {
     fetchAttendees();
   }, []);
 
-  const handleCreateInputChange = (e) => {
+  const handleCreateFormInputChange = (e) => {
     const inputName = e.target.name;
     const inputValue = e.target.value;
 
@@ -66,7 +66,7 @@ export function Dashboard() {
   };
 
   const handleEditBtn = (editedAttendee) => {
-    setEditedAttendee(editedAttendee.id);
+    setEditedAttendeeId(editedAttendee.id);
     setEditFormData({ ...editedAttendee });
   };
 
@@ -89,16 +89,15 @@ export function Dashboard() {
 
     setAttendees(newAttendees);
 
-    await fetch(`http://localhost:3005/attendees/${editedAttendee}`, {
+    await fetch(`http://localhost:3005/attendees/${editedAttendeeId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(editFormData),
     });
-    console.log(editedAttendee);
 
-    setEditedAttendee(null);
+    setEditedAttendeeId(null);
   };
 
   const handleDeleteBtn = async (attendeeId) => {
@@ -116,7 +115,7 @@ export function Dashboard() {
   };
 
   const handleCancelBtn = () => {
-    setEditedAttendee(null);
+    setEditedAttendeeId(null);
   };
 
   return (
@@ -124,13 +123,13 @@ export function Dashboard() {
       <Header />
       <AttendeeCreator
         newAttendee={newAttendee}
-        handleCreateInputChange={handleCreateInputChange}
+        handleCreateFormInputChange={handleCreateFormInputChange}
         handleCreateFormSubmit={handleCreateFormSubmit}
       />
       {attendees.length > 0 ? (
         <AttendeeList
           attendees={attendees}
-          editedAttendee={editedAttendee}
+          editedAttendeeId={editedAttendeeId}
           editFormData={editFormData}
           handleDeleteBtn={handleDeleteBtn}
           handleCancelBtn={handleCancelBtn}
