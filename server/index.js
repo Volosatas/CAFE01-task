@@ -42,6 +42,22 @@ app.post("/attendees", (req, res) => {
   res.json(newAttendeesArr);
 });
 
+app.delete("/attendees/:id", (req, res) => {
+  const { id } = req.params;
+  const data = fs.readFileSync("data/attendees.json", "utf-8");
+  const jsonData = JSON.parse(data);
+
+  const filteredData = jsonData.filter((attendee) => attendee.id !== id);
+
+  fs.writeFileSync(
+    "data/attendees.json",
+    JSON.stringify(filteredData, null, 2),
+    "utf-8"
+  );
+  console.log(filteredData);
+  res.send(filteredData);
+});
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });

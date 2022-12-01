@@ -1,23 +1,30 @@
 [
   {
-    "id": "63dd34e6-8e55-590d-34be-204394c03693",
+    "id": "d8950389-cee6-f80d-4280-962e92984742",
     "firstName": "Vilius",
     "lastName": "Garba",
-    "age": 28,
+    "age": "28",
     "email": "vilius.garba@gmail.com"
   },
   {
-    "id": 2,
-    "firstName": "Neda",
-    "lastName": "Pukytė",
-    "age": 26,
-    "email": "neda.pukyte@gmail.com"
+    "id": "ad52689c-ae32-442f-9843-2f221da5393b",
+    "firstName": "Keptas",
+    "lastName": "Kornelijus",
+    "age": "55",
+    "email": "KK@gmail.com"
   },
   {
-    "id": 3,
-    "firstName": "Lars",
-    "lastName": "Ulrich",
-    "age": 666,
-    "email": "lars@gmail.com"
+    "id": "e721637d-c67c-c4b9-3eda-c7da1820d7d5",
+    "firstName": "Dėdė",
+    "lastName": "Tumas",
+    "age": "96",
+    "email": "vaizgantas@gmail.com"
+  },
+  {
+    "id": "3b66ddf4-59f2-f350-4133-be6f9ef28687",
+    "firstName": "Žydras",
+    "lastName": "Savickas",
+    "age": "23",
+    "email": "patskaipsvoris@gmail.com"
   }
 ]

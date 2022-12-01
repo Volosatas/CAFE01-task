@@ -46,7 +46,7 @@ export function Dashboard() {
     setAttendees([...attendees, newAttendee]);
 
     const postNewUser = async () => {
-      const response = await fetch("http://localhost:3005/attendees", {
+      await fetch("http://localhost:3005/attendees", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -91,11 +91,18 @@ export function Dashboard() {
     setEditedAttendee(null);
   };
 
-  const handleDeleteBtn = (attendeeId) => {
+  const handleDeleteBtn = async (attendeeId) => {
     const filteredAttendees = attendees.filter(
       (attendee) => attendee.id !== attendeeId
     );
     setAttendees(filteredAttendees);
+
+    await fetch(`http://localhost:3005/attendees/${attendeeId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
   };
 
   const handleCancelBtn = () => {
