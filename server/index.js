@@ -30,33 +30,22 @@ app.get("/attendees", (req, res) => {
     if (err) {
       throw err;
     }
-    res.json(rows);
+    res.send(rows);
   });
-
-  db.close();
 });
 
-// app.post("/attendees", (req, res) => {
-//   const { id, firstName, lastName, age, email } = req.body;
+app.post("/attendees", (req, res) => {
+  const sqlQuery =
+    "INSERT INTO attendees (id, firstName, lastName, age, email) VALUES (?,?,?,?,?)";
+  const { id, firstName, lastName, age, email } = req.body;
 
-//   const newAttendeesArr = [...attendeesArr, newAttendee];
-
-//   // fs.writeFileSync(
-//   //   "data/attendees.json",
-//   //   JSON.stringify(newAttendeesArr, null, 2)
-//   // );
-
-//   const sqlQuery =
-//     "INSERT INTO attendees (id, firstName, lastName, age, email) VALUES (?,?,?,?,?)";
-//   db.run(sqlQuery, [id, firstName, lastName, age, email], (err) => {
-//     if (err) {
-//       console.log(err);
-//     }
-//     console.log("success");
-//   });
-
-//   res.json(newAttendeesArr);
-// });
+  db.run(sqlQuery, [id, firstName, lastName, age, email], (err, rows) => {
+    if (err) {
+      throw err;
+    }
+    res.send(req.body);
+  });
+});
 
 app.delete("/attendees/:id", (req, res) => {
   const { id } = req.params;
