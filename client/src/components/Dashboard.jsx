@@ -3,41 +3,11 @@ import { Header } from "./Header";
 import { AttendeeCreator } from "./AttendeeCreator";
 import { AttendeeList } from "./AttendeeList";
 import { NoAttendees } from "./NoAttendees";
+import { useEffect } from "react";
 import uuid from "react-uuid";
 
 export function Dashboard() {
-  const guests = [
-    {
-      id: uuid(),
-      firstName: "Vilius",
-      lastName: "Garba",
-      age: 28,
-      email: "vilius.garba@gmail.com",
-    },
-    {
-      id: uuid(),
-      firstName: "Neda",
-      lastName: "Pukytė",
-      age: 26,
-      email: "neda.pukyte@gmail.com",
-    },
-    {
-      id: uuid(),
-      firstName: "Lars",
-      lastName: "Ulrich",
-      age: 666,
-      email: "lars@gmail.com",
-    },
-    {
-      id: 1,
-      firstName: "sudoku",
-      lastName: "pie",
-      age: 78,
-      email: "myman@hotline.com",
-    },
-  ];
-
-  const [attendees, setAttendees] = useState(guests);
+  const [attendees, setAttendees] = useState([]);
   const [newAttendee, setNewAttendee] = useState({
     id: uuid(),
     firstName: "",
@@ -53,6 +23,15 @@ export function Dashboard() {
     age: "",
     email: "",
   });
+
+  useEffect(() => {
+    const fetchAttendees = async () => {
+      const response = await fetch("http://localhost:3005/attendees");
+      const attendees = await response.json();
+      setAttendees([...attendees]);
+    };
+    fetchAttendees();
+  }, []);
 
   const handleCreateInputChange = (e) => {
     const inputName = e.target.name;
@@ -105,7 +84,7 @@ export function Dashboard() {
     );
     setAttendees(filteredAttendees);
   };
-  
+
   const handleCancelBtn = () => {
     setEditedAttendee(null);
   };
