@@ -5,18 +5,27 @@ import { Dashboard } from "./components/Dashboard";
 import { LoginScreen } from "./components/LoginScreen";
 
 function App() {
-  const [user, setUser] = useState({
-    username: "",
-    password: "",
-  });
+  const [user, setUser] = useState({ username: "" });
   const [error, setError] = useState("");
 
+  const user1 = {
+    username: "pmagnet",
+    password: "123",
+  };
+
   const login = (details) => {
-    console.log(details);
+    if (
+      details.username === user1.username &&
+      details.password === user1.password
+    ) {
+      setUser({ username: details.username });
+      return;
+    }
+    setError("Incorrect username or password");
   };
 
   const logout = () => {
-    console.log("Logout");
+    setUser({ username: "" });
   };
 
   return (

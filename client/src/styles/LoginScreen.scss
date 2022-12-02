@@ -28,4 +28,9 @@
   &__form--input {
     margin-bottom: 30px;
   }
+
+  &__form--error {
+    color: rgb(255, 0, 0);
+    font-weight: 600;
+  }
 }

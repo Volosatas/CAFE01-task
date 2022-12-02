@@ -22,7 +22,11 @@ export function LoginScreen(props) {
   return (
     <div className="loginContainer">
       <div className="loginScreen">
-        <p className="loginScreen__title">Welcome! Please log in</p>
+        {props.error !== "" ? (
+          <p className="loginScreen__form--error">{props.error}</p>
+        ) : (
+          <p className="loginScreen__title">Welcome! Please log in</p>
+        )}
         <form onSubmit={handleSubmit} className="loginScreen__form">
           <Form.Control
             name="username"
@@ -40,7 +44,6 @@ export function LoginScreen(props) {
             value={details.password}
             onChange={(e) => handleLoginFormInputChange(e)}
           />
-          {/* ERROR */}
           <Button type="submit" variant="primary">
             Login
           </Button>
