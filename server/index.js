@@ -48,19 +48,15 @@ app.post("/attendees", (req, res) => {
 });
 
 app.delete("/attendees/:id", (req, res) => {
+  const sqlQuery = "DELETE FROM attendees WHERE id = (?)";
   const { id } = req.params;
-  const data = fs.readFileSync("data/attendees.json", "utf-8");
-  const jsonData = JSON.parse(data);
 
-  const filteredData = jsonData.filter((attendee) => attendee.id !== id);
-
-  fs.writeFileSync(
-    "data/attendees.json",
-    JSON.stringify(filteredData, null, 2),
-    "utf-8"
-  );
-
-  res.send(filteredData);
+  db.run(sqlQuery, [id], (err) => {
+    if (err) {
+      throw err;
+    }
+    res.send(req.body);
+  });
 });
 
 app.put("/attendees/:id", (req, res) => {
