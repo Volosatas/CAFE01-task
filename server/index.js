@@ -19,7 +19,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.set("etag", false);
 app.use(cors());
 
-app.get("/", (req, res) => {
+app.get("/login", (req, res) => {
   res.send("Hello World");
 });
 
