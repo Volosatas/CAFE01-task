@@ -112,7 +112,7 @@ export function Dashboard(props) {
     );
     setAttendees(filteredAttendees);
 
-    await fetch(`http://localhost:3005/attendees/${attendeeId}`, {
+    await fetch(`http://localhost:3005/user/${user.id}/attendees/${attendeeId}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
