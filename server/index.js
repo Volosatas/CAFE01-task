@@ -1,6 +1,5 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const fs = require("fs");
 const cors = require("cors");
 const sqlite3 = require("sqlite3").verbose();
 
@@ -19,17 +18,31 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.set("etag", false);
 app.use(cors());
 
-app.get("/login", (req, res) => {
-  res.send("Hello World");
+app.post("/users", (req, res) => {
+  const sqlQuery = "SELECT * FROM users WHERE username = ? AND password = ?";
+  const { username, password } = req.body;
+  console.log(req.body);
+
+  db.all(sqlQuery, [username, password], (err, rows) => {
+    if (err) {
+      return;
+    } else if (rows.length > 0) {
+      res.send({ username: username });
+    } else {
+      res.status(401);
+      res.json("Incorrect username or password");
+    }
+  });
 });
 
 app.get("/attendees", (req, res) => {
-  const sqlQuery = "SELECT * FROM attendees";
+  const sqlQuery = "SELECT * FROM user1_attendees";
 
   db.all(sqlQuery, [], (err, rows) => {
     if (err) {
       throw err;
     }
+    res.status(200);
     res.send(rows);
   });
 });

@@ -8,15 +8,18 @@ function App() {
   const [user, setUser] = useState({ username: "" });
   const [error, setError] = useState("");
 
-  const user1 = {
-    username: "pmagnet",
-    password: "123",
-  };
+  const login = async (details) => {
+    const response = await fetch("http://localhost:3005/users", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(details),
+    });
+    const username = await response.json();
 
-  const login = (details) => {
     if (
-      details.username === user1.username &&
-      details.password === user1.password
+      details.username === username.username
     ) {
       setUser({ username: details.username });
       return;
