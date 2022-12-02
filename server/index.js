@@ -64,7 +64,7 @@ app.post("/attendees", (req, res) => {
 
 app.delete("/user/:userid/attendees/:attendeeid", (req, res) => {
   const { userid, attendeeid } = req.params;
-  const sqlQuery = `DELETE FROM user${userid}_attendees WHERE id = ${attendeeid}`;
+  const sqlQuery = `DELETE FROM user${userid}_attendees WHERE id = '${attendeeid}'`;
   console.log(req.params);
   db.run(sqlQuery, [], (err) => {
     if (err) {

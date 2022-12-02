@@ -1,4 +1,3 @@
-import "./styles/App.scss";
 import "./styles/styles.js";
 import React from "react";
 import { Dashboard } from "./components/Dashboard";

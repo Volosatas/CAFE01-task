@@ -6,7 +6,7 @@ export function UserProvider({ children }) {
   const [user, setUser] = useState({ username: "", id: "" });
   const [error, setError] = useState("");
 
-  const login = async (details, e) => {
+  const login = async (details) => {
     const response = await fetch("http://localhost:3005/users", {
       method: "POST",
       headers: {

@@ -8,7 +8,7 @@ import { useContext } from "react";
 import { UserContext } from "../UserContext";
 import uuid from "react-uuid";
 
-export function Dashboard(props) {
+export function Dashboard() {
   const { user } = useContext(UserContext);
 
   const [attendees, setAttendees] = useState([]);
