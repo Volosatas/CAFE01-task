@@ -74,10 +74,10 @@ app.delete("/user/:userid/attendees/:attendeeid", (req, res) => {
   });
 });
 
-app.put("/attendees/:id", (req, res) => {
-  const sqlQuery =
-    "UPDATE attendees SET firstName = (?), lastName = (?), age = (?), email = (?) WHERE id = (?);";
+app.put("/user/:userid/attendees/:attendeeid", (req, res) => {
+  const { userid } = req.params;
   const { id, firstName, lastName, age, email } = req.body;
+  const sqlQuery = `UPDATE user${userid}_attendees SET firstName = (?), lastName = (?), age = (?), email = (?) WHERE id = (?);`;
 
   db.run(sqlQuery, [firstName, lastName, age, email, id], (err) => {
     if (err) {

@@ -95,13 +95,16 @@ export function Dashboard(props) {
 
     setAttendees(newAttendees);
 
-    await fetch(`http://localhost:3005/attendees/${editedAttendeeId}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(editFormData),
-    });
+    await fetch(
+      `http://localhost:3005/user/${user.id}/attendees/${editedAttendeeId}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(editFormData),
+      }
+    );
 
     setEditedAttendeeId(null);
   };
@@ -112,12 +115,15 @@ export function Dashboard(props) {
     );
     setAttendees(filteredAttendees);
 
-    await fetch(`http://localhost:3005/user/${user.id}/attendees/${attendeeId}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    await fetch(
+      `http://localhost:3005/user/${user.id}/attendees/${attendeeId}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
   };
 
   const handleCancelBtn = () => {
