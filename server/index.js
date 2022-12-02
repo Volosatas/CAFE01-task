@@ -36,8 +36,9 @@ app.post("/users", (req, res) => {
   });
 });
 
-app.get("/:id/attendees", (req, res) => {
-  const sqlQuery = "SELECT * FROM user1_attendees";
+app.get("/user/:id/attendees", (req, res) => {
+  const { id } = req.params;
+  const sqlQuery = `SELECT * FROM user${id}_attendees`;
 
   db.all(sqlQuery, [], (err, rows) => {
     if (err) {

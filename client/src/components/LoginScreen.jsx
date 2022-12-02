@@ -5,7 +5,7 @@ import "../styles/LoginScreen.scss";
 import { useContext } from "react";
 import { UserContext } from "../UserContext";
 
-export function LoginScreen(props) {
+export function LoginScreen() {
   const { user, login, error } = useContext(UserContext);
   const [details, setDetails] = useState({ username: "", password: "" });
 

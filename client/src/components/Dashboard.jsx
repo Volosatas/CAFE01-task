@@ -4,9 +4,13 @@ import { AttendeeCreator } from "./AttendeeCreator";
 import { AttendeeList } from "./AttendeeList";
 import { NoAttendees } from "./NoAttendees";
 import { useEffect } from "react";
+import { useContext } from "react";
+import { UserContext } from "../UserContext";
 import uuid from "react-uuid";
 
 export function Dashboard(props) {
+  const { user } = useContext(UserContext);
+
   const [attendees, setAttendees] = useState([]);
   const [newAttendee, setNewAttendee] = useState({
     id: uuid(),
@@ -26,12 +30,14 @@ export function Dashboard(props) {
 
   useEffect(() => {
     const fetchAttendees = async () => {
-      const response = await fetch(`http://localhost:3005/attendees`);
+      const response = await fetch(
+        `http://localhost:3005/user/${user.id}/attendees`
+      );
       const data = await response.json();
       setAttendees([...data]);
     };
     fetchAttendees();
-  }, []);
+  }, [user.id]);
 
   const handleCreateFormInputChange = (e) => {
     const inputName = e.target.name;
@@ -120,7 +126,7 @@ export function Dashboard(props) {
 
   return (
     <>
-      <Header logout={props.logout} />
+      <Header />
       <AttendeeCreator
         newAttendee={newAttendee}
         handleCreateFormInputChange={handleCreateFormInputChange}
