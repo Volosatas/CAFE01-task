@@ -7,7 +7,7 @@ const sqlite3 = require("sqlite3").verbose();
 const app = express();
 const port = 3005;
 
-let db = new sqlite3.Database("data/event-app-db.db", (err) => {
+const db = new sqlite3.Database("data/event-app-db.db", (err) => {
   if (err) {
     return console.error(err.message);
   }
@@ -24,9 +24,9 @@ app.get("/", (req, res) => {
 });
 
 app.get("/attendees", (req, res) => {
-  let sql = "SELECT * FROM attendees";
+  const sqlQuery = "SELECT * FROM attendees";
 
-  db.all(sql, [], (err, rows) => {
+  db.all(sqlQuery, [], (err, rows) => {
     if (err) {
       throw err;
     }
@@ -39,7 +39,7 @@ app.post("/attendees", (req, res) => {
     "INSERT INTO attendees (id, firstName, lastName, age, email) VALUES (?,?,?,?,?)";
   const { id, firstName, lastName, age, email } = req.body;
 
-  db.run(sqlQuery, [id, firstName, lastName, age, email], (err, rows) => {
+  db.run(sqlQuery, [id, firstName, lastName, age, email], (err) => {
     if (err) {
       throw err;
     }
@@ -51,6 +51,7 @@ app.delete("/attendees/:id", (req, res) => {
   const { id } = req.params;
   const data = fs.readFileSync("data/attendees.json", "utf-8");
   const jsonData = JSON.parse(data);
+
   const filteredData = jsonData.filter((attendee) => attendee.id !== id);
 
   fs.writeFileSync(
@@ -63,21 +64,16 @@ app.delete("/attendees/:id", (req, res) => {
 });
 
 app.put("/attendees/:id", (req, res) => {
-  const { id } = req.params;
-  const newAttendee = req.body;
-  const data = fs.readFileSync("data/attendees.json", "utf-8");
-  const jsonData = JSON.parse(data);
-  const index = jsonData.findIndex((attendee) => attendee.id === id);
+  const sqlQuery =
+    "UPDATE attendees SET firstName = (?), lastName = (?), age = (?), email = (?) WHERE id = (?);";
+  const { id, firstName, lastName, age, email } = req.body;
 
-  jsonData[index] = newAttendee;
-
-  fs.writeFileSync(
-    "data/attendees.json",
-    JSON.stringify(jsonData, null, 2),
-    "utf-8"
-  );
-
-  res.send(newAttendee);
+  db.run(sqlQuery, [firstName, lastName, age, email, id], (err) => {
+    if (err) {
+      throw err;
+    }
+    res.send(req.body);
+  });
 });
 
 app.listen(port, () => {
