@@ -27,7 +27,8 @@ app.post("/users", (req, res) => {
     if (err) {
       return;
     } else if (rows.length > 0) {
-      res.send({ username: username });
+      console.log(rows);
+      res.send({ username: username, id: rows[0].user_id });
     } else {
       res.status(401);
       res.json("Incorrect username or password");
@@ -35,7 +36,7 @@ app.post("/users", (req, res) => {
   });
 });
 
-app.get("/attendees", (req, res) => {
+app.get("/:id/attendees", (req, res) => {
   const sqlQuery = "SELECT * FROM user1_attendees";
 
   db.all(sqlQuery, [], (err, rows) => {

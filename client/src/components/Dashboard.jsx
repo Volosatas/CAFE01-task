@@ -26,7 +26,7 @@ export function Dashboard(props) {
 
   useEffect(() => {
     const fetchAttendees = async () => {
-      const response = await fetch("http://localhost:3005/attendees");
+      const response = await fetch(`http://localhost:3005/attendees`);
       const data = await response.json();
       setAttendees([...data]);
     };

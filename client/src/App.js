@@ -1,42 +1,22 @@
 import "./styles/App.scss";
 import "./styles/styles.js";
-import React, { useState } from "react";
+import React from "react";
 import { Dashboard } from "./components/Dashboard";
 import { LoginScreen } from "./components/LoginScreen";
+import { useContext } from "react";
+import { UserContext } from "./UserContext";
+
+export const LoggedInUser = React.createContext();
 
 function App() {
-  const [user, setUser] = useState({ username: "" });
-  const [error, setError] = useState("");
-
-  const login = async (details) => {
-    const response = await fetch("http://localhost:3005/users", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(details),
-    });
-    const username = await response.json();
-
-    if (
-      details.username === username.username
-    ) {
-      setUser({ username: details.username });
-      return;
-    }
-    setError("Incorrect username or password");
-  };
-
-  const logout = () => {
-    setUser({ username: "" });
-  };
-
+  const { user } = useContext(UserContext);
+ 
   return (
     <div className="app">
       {user.username !== "" ? (
-        <Dashboard logout={logout} />
+        <Dashboard logout={user.logout} />
       ) : (
-        <LoginScreen login={login} error={error} />
+        <LoginScreen login={user.login} error={user.error} />
       )}
     </div>
   );

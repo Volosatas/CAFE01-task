@@ -2,15 +2,12 @@ import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import "../styles/LoginScreen.scss";
+import { useContext } from "react";
+import { UserContext } from "../UserContext";
 
 export function LoginScreen(props) {
+  const { user, login, error } = useContext(UserContext);
   const [details, setDetails] = useState({ username: "", password: "" });
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    props.login(details);
-  };
 
   const handleLoginFormInputChange = (e) => {
     const inputName = e.target.name;
@@ -19,15 +16,23 @@ export function LoginScreen(props) {
     setDetails({ ...details, [inputName]: inputValue });
   };
 
+  const handleLoginSubmit = (e) => {
+    e.preventDefault();
+    login(details);
+  };
+
   return (
     <div className="loginContainer">
       <div className="loginScreen">
-        {props.error !== "" ? (
-          <p className="loginScreen__form--error">{props.error}</p>
+        {user.error !== "" ? (
+          <p className="loginScreen__form--error">{error}</p>
         ) : (
           <p className="loginScreen__title">Welcome! Please log in</p>
         )}
-        <form onSubmit={handleSubmit} className="loginScreen__form">
+        <form
+          onSubmit={(e) => handleLoginSubmit(e)}
+          className="loginScreen__form"
+        >
           <Form.Control
             name="username"
             className="loginScreen__form--input"
