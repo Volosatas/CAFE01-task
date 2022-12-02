@@ -1,4 +1,6 @@
-export function Header() {
+import Button from "react-bootstrap/Button";
+
+export function Header(props) {
   return (
     <header className="header">
       <div className="header__middle">
@@ -7,6 +9,9 @@ export function Header() {
           <br /> Dashboard
         </h1>
       </div>
+      <Button onClick={props.logout} variant="danger">
+        Log Out
+      </Button>
     </header>
   );
 }

@@ -6,7 +6,7 @@ import { NoAttendees } from "./NoAttendees";
 import { useEffect } from "react";
 import uuid from "react-uuid";
 
-export function Dashboard() {
+export function Dashboard(props) {
   const [attendees, setAttendees] = useState([]);
   const [newAttendee, setNewAttendee] = useState({
     id: uuid(),
@@ -120,7 +120,7 @@ export function Dashboard() {
 
   return (
     <>
-      <Header />
+      <Header logout={props.logout} />
       <AttendeeCreator
         newAttendee={newAttendee}
         handleCreateFormInputChange={handleCreateFormInputChange}
