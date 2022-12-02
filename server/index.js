@@ -1,6 +1,5 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const fs = require("fs");
 const cors = require("cors");
 const sqlite3 = require("sqlite3").verbose();
 
@@ -19,25 +18,41 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.set("etag", false);
 app.use(cors());
 
-app.get("/", (req, res) => {
-  res.send("Hello World");
+app.post("/users", (req, res) => {
+  const sqlQuery = "SELECT * FROM users WHERE username = ? AND password = ?";
+  const { username, password } = req.body;
+  console.log(req.body);
+
+  db.all(sqlQuery, [username, password], (err, rows) => {
+    if (err) {
+      return;
+    } else if (rows.length > 0) {
+      console.log(rows);
+      res.send({ username: username, id: rows[0].user_id });
+    } else {
+      res.status(401);
+      res.json("Incorrect username or password");
+    }
+  });
 });
 
-app.get("/attendees", (req, res) => {
-  const sqlQuery = "SELECT * FROM attendees";
+app.get("/user/:userid/attendees", (req, res) => {
+  const { userid } = req.params;
+  const sqlQuery = `SELECT * FROM user${userid}_attendees`;
 
   db.all(sqlQuery, [], (err, rows) => {
     if (err) {
       throw err;
     }
+    res.status(200);
     res.send(rows);
   });
 });
 
-app.post("/attendees", (req, res) => {
-  const sqlQuery =
-    "INSERT INTO attendees (id, firstName, lastName, age, email) VALUES (?,?,?,?,?)";
+app.post("/user/:userid/attendees", (req, res) => {
+  const { userid } = req.params;
   const { id, firstName, lastName, age, email } = req.body;
+  const sqlQuery = `INSERT INTO user${userid}_attendees (id, firstName, lastName, age, email) VALUES (?,?,?,?,?)`;
 
   db.run(sqlQuery, [id, firstName, lastName, age, email], (err) => {
     if (err) {
@@ -47,11 +62,11 @@ app.post("/attendees", (req, res) => {
   });
 });
 
-app.delete("/attendees/:id", (req, res) => {
-  const sqlQuery = "DELETE FROM attendees WHERE id = (?)";
-  const { id } = req.params;
-
-  db.run(sqlQuery, [id], (err) => {
+app.delete("/user/:userid/attendees/:attendeeid", (req, res) => {
+  const { userid, attendeeid } = req.params;
+  const sqlQuery = `DELETE FROM user${userid}_attendees WHERE id = '${attendeeid}'`;
+  console.log(req.params);
+  db.run(sqlQuery, [], (err) => {
     if (err) {
       throw err;
     }
@@ -59,10 +74,10 @@ app.delete("/attendees/:id", (req, res) => {
   });
 });
 
-app.put("/attendees/:id", (req, res) => {
-  const sqlQuery =
-    "UPDATE attendees SET firstName = (?), lastName = (?), age = (?), email = (?) WHERE id = (?);";
+app.put("/user/:userid/attendees/:attendeeid", (req, res) => {
+  const { userid } = req.params;
   const { id, firstName, lastName, age, email } = req.body;
+  const sqlQuery = `UPDATE user${userid}_attendees SET firstName = (?), lastName = (?), age = (?), email = (?) WHERE id = (?);`;
 
   db.run(sqlQuery, [firstName, lastName, age, email, id], (err) => {
     if (err) {

@@ -4,9 +4,13 @@ import { AttendeeCreator } from "./AttendeeCreator";
 import { AttendeeList } from "./AttendeeList";
 import { NoAttendees } from "./NoAttendees";
 import { useEffect } from "react";
+import { useContext } from "react";
+import { UserContext } from "../UserContext";
 import uuid from "react-uuid";
 
 export function Dashboard() {
+  const { user } = useContext(UserContext);
+
   const [attendees, setAttendees] = useState([]);
   const [newAttendee, setNewAttendee] = useState({
     id: uuid(),
@@ -26,12 +30,14 @@ export function Dashboard() {
 
   useEffect(() => {
     const fetchAttendees = async () => {
-      const response = await fetch("http://localhost:3005/attendees");
+      const response = await fetch(
+        `http://localhost:3005/user/${user.id}/attendees`
+      );
       const data = await response.json();
       setAttendees([...data]);
     };
     fetchAttendees();
-  }, []);
+  }, [user.id]);
 
   const handleCreateFormInputChange = (e) => {
     const inputName = e.target.name;
@@ -46,7 +52,7 @@ export function Dashboard() {
     setAttendees([...attendees, newAttendee]);
 
     const postNewUser = async () => {
-      await fetch("http://localhost:3005/attendees", {
+      await fetch(`http://localhost:3005/user/${user.id}/attendees`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -89,13 +95,16 @@ export function Dashboard() {
 
     setAttendees(newAttendees);
 
-    await fetch(`http://localhost:3005/attendees/${editedAttendeeId}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(editFormData),
-    });
+    await fetch(
+      `http://localhost:3005/user/${user.id}/attendees/${editedAttendeeId}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(editFormData),
+      }
+    );
 
     setEditedAttendeeId(null);
   };
@@ -106,12 +115,15 @@ export function Dashboard() {
     );
     setAttendees(filteredAttendees);
 
-    await fetch(`http://localhost:3005/attendees/${attendeeId}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    await fetch(
+      `http://localhost:3005/user/${user.id}/attendees/${attendeeId}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
   };
 
   const handleCancelBtn = () => {
