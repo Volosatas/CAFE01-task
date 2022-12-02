@@ -52,7 +52,7 @@ export function Dashboard() {
     setAttendees([...attendees, newAttendee]);
 
     const postNewUser = async () => {
-      await fetch("http://localhost:3005/attendees", {
+      await fetch(`http://localhost:3005/user/${user.id}/attendees`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

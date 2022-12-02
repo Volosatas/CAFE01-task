@@ -36,9 +36,9 @@ app.post("/users", (req, res) => {
   });
 });
 
-app.get("/user/:id/attendees", (req, res) => {
-  const { id } = req.params;
-  const sqlQuery = `SELECT * FROM user${id}_attendees`;
+app.get("/user/:userid/attendees", (req, res) => {
+  const { userid } = req.params;
+  const sqlQuery = `SELECT * FROM user${userid}_attendees`;
 
   db.all(sqlQuery, [], (err, rows) => {
     if (err) {
@@ -49,10 +49,10 @@ app.get("/user/:id/attendees", (req, res) => {
   });
 });
 
-app.post("/attendees", (req, res) => {
-  const sqlQuery =
-    "INSERT INTO attendees (id, firstName, lastName, age, email) VALUES (?,?,?,?,?)";
+app.post("/user/:userid/attendees", (req, res) => {
+  const { userid } = req.params;
   const { id, firstName, lastName, age, email } = req.body;
+  const sqlQuery = `INSERT INTO user${userid}_attendees (id, firstName, lastName, age, email) VALUES (?,?,?,?,?)`;
 
   db.run(sqlQuery, [id, firstName, lastName, age, email], (err) => {
     if (err) {
