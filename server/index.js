@@ -21,14 +21,13 @@ app.use(cors());
 app.post("/users", (req, res) => {
   const sqlQuery = "SELECT * FROM users WHERE username = ? AND password = ?";
   const { username, password } = req.body;
-  console.log(req.body);
 
   db.all(sqlQuery, [username, password], (err, rows) => {
     if (err) {
       return;
     } else if (rows.length > 0) {
-      console.log(rows);
-      res.send({ username: username, id: rows[0].user_id });
+      res.status(200);
+      res.send({ username: username, id: rows[0].userId });
     } else {
       res.status(401);
       res.json("Incorrect username or password");
@@ -38,9 +37,9 @@ app.post("/users", (req, res) => {
 
 app.get("/user/:userid/attendees", (req, res) => {
   const { userid } = req.params;
-  const sqlQuery = `SELECT * FROM user${userid}_attendees`;
+  const sqlQuery = "SELECT * FROM attendees WHERE userId = (?)";
 
-  db.all(sqlQuery, [], (err, rows) => {
+  db.all(sqlQuery, [userid], (err, rows) => {
     if (err) {
       throw err;
     }
@@ -52,9 +51,9 @@ app.get("/user/:userid/attendees", (req, res) => {
 app.post("/user/:userid/attendees", (req, res) => {
   const { userid } = req.params;
   const { id, firstName, lastName, age, email } = req.body;
-  const sqlQuery = `INSERT INTO user${userid}_attendees (id, firstName, lastName, age, email) VALUES (?,?,?,?,?)`;
+  const sqlQuery = `INSERT INTO attendees (attendeeId, userId, firstName, lastName, age, email) VALUES (?,?,?,?,?,?)`;
 
-  db.run(sqlQuery, [id, firstName, lastName, age, email], (err) => {
+  db.run(sqlQuery, [id, userid, firstName, lastName, age, email], (err) => {
     if (err) {
       throw err;
     }
