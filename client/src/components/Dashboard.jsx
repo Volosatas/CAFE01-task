@@ -128,7 +128,7 @@ export function Dashboard() {
   };
 
   return (
-    <>
+    <div className="dashboard">
       <Header />
       <AttendeeCreator
         newAttendee={newAttendee}
@@ -149,6 +149,6 @@ export function Dashboard() {
       ) : (
         <NoAttendees />
       )}
-    </>
+    </div>
   );
 }
