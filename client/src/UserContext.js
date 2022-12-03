@@ -24,7 +24,7 @@ export function UserProvider({ children }) {
     } else if (details.password === "") {
       setError("Enter your password");
     } else {
-      setError("Incorrect username or password");
+      setError("Wrong username or password");
     }
   };
 

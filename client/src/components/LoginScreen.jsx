@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
+import { Form, Button } from "react-bootstrap";
 import "../styles/LoginScreen.scss";
 import { useContext } from "react";
 import { UserContext } from "../UserContext";
+import logo from "../images/logo.png";
 
 export function LoginScreen() {
-  const { user, login, error } = useContext(UserContext);
+  const { login, error } = useContext(UserContext);
   const [details, setDetails] = useState({ username: "", password: "" });
 
   const handleLoginFormInputChange = (e) => {
@@ -22,37 +22,52 @@ export function LoginScreen() {
   };
 
   return (
-    <div className="loginContainer">
-      <div className="loginScreen">
-        {user.error !== "" ? (
-          <p className="loginScreen__form--error">{error}</p>
+    <div className="loginScreen">
+      <div className="loginScreen__loginBox">
+        {error !== "" ? (
+          <p className="loginScreen__loginBox--error">{error}</p>
         ) : (
-          <p className="loginScreen__title">Welcome! Please log in</p>
+          <p className="loginScreen__loginBox--title">
+            Welcome! Please log in.
+          </p>
         )}
-        <form
+        <Form
           onSubmit={(e) => handleLoginSubmit(e)}
-          className="loginScreen__form"
+          className="loginScreen__loginBox--form"
         >
+          <Form.Label className="loginScreen__loginBox--form-label">
+            Username:
+          </Form.Label>
           <Form.Control
             name="username"
-            className="loginScreen__form--input"
+            className="loginScreen__loginBox--form-input"
             type="text"
             placeholder="Username"
             value={details.username}
             onChange={(e) => handleLoginFormInputChange(e)}
           />
+          <Form.Label className="loginScreen__loginBox--form-label">
+            Password:
+          </Form.Label>
           <Form.Control
             name="password"
-            className="loginScreen__form--input"
+            className="loginScreen__loginBox--form-input"
             type="password"
             placeholder="Password"
             value={details.password}
             onChange={(e) => handleLoginFormInputChange(e)}
           />
-          <Button type="submit" variant="primary">
+          <Button
+            className="loginScreen__loginBox--form-button"
+            type="submit"
+            variant="primary"
+          >
             Login
           </Button>
-        </form>
+        </Form>
+      </div>
+      <div className="loginScreen__hero">
+        <img src={logo} alt="logo" className="loginScreen__hero--logo" />
       </div>
     </div>
   );

@@ -1,36 +1,96 @@
-.loginContainer {
-  width: 100%;
+.loginScreen {
   height: 100vh;
   display: flex;
-  align-items: center;
-}
-
-.loginScreen {
-  margin: 0 auto;
-  padding: 50px 50px;
-  max-width: 50%;
-  height: 70vh;
-  display: flex;
-  flex-direction: column;
+  flex-direction: row-reverse;
   justify-content: center;
-  background: url(../images/login.jpg);
+  align-items: center;
+  background: url(../images/login-screen.jpg);
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  border-radius: 5px;
 
-  &__title {
-    color: white;
-    font-weight: 600;
-    font-size: large;
+  &__hero {
+    margin: 50px;
   }
 
-  &__form--input {
-    margin-bottom: 30px;
-  }
+  &__loginBox {
+    padding: 70px 50px;
+    border-radius: 5px;
+    background: rgba(0, 0, 0, 0.3);
 
-  &__form--error {
-    color: rgb(255, 0, 0);
-    font-weight: 600;
+    &--title {
+      color: white;
+      font-weight: 600;
+      font-size: large;
+    }
+    &--error {
+      color: rgb(234, 69, 39);
+      font-weight: 600;
+    }
+
+    &--form-input {
+      margin-bottom: 30px;
+      width: 90%;
+    }
+
+    &--form-label {
+      color: white;
+      font-weight: 500;
+    }
+  }
+}
+
+@media only screen and (max-width: 1007px) {
+  .loginScreen {
+    display: flex;
+    flex-direction: column-reverse;
+
+    &__hero {
+      height: 30vh;
+    }
+
+    &__loginBox {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+
+      &--title {
+        margin-bottom: 50px;
+      }
+
+      &--form {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        &-input {
+          margin: 0;
+          width: 100%;
+        }
+
+        &-button {
+          align-self: center;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 640px) {
+  .loginScreen {
+    &__hero {
+      &--logo {
+        max-height: 125px;
+      }
+    }
+    &__loginBox {
+      height: 80vh;
+      flex-direction: column;
+
+      &--form {
+        flex-direction: column;
+      }
+    }
   }
 }

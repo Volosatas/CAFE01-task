@@ -9,7 +9,7 @@ export const LoggedInUser = React.createContext();
 
 function App() {
   const { user } = useContext(UserContext);
- 
+
   return (
     <div className="app">
       {user.username !== "" ? (
