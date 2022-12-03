@@ -21,8 +21,8 @@ export function AttendeeList(props) {
           <tbody>
             {props.attendees.map((attendee, i) => {
               return (
-                <Fragment key={attendee.id}>
-                  {props.editedAttendeeId === attendee.id ? (
+                <Fragment key={attendee.attendeeId}>
+                  {props.editedAttendeeId === attendee.attendeeId ? (
                     <AttendeeRowEditable
                       editFormData={props.editFormData}
                       handleEditInputChange={props.handleEditInputChange}

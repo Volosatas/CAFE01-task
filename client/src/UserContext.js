@@ -1,9 +1,9 @@
 import { createContext, useState } from "react";
 
-export const UserContext = createContext({ username: "", id: "" });
+export const UserContext = createContext({ username: "", userId: "" });
 
 export function UserProvider({ children }) {
-  const [user, setUser] = useState({ username: "", id: "" });
+  const [user, setUser] = useState({ username: "", userId: "" });
   const [error, setError] = useState("");
 
   const login = async (details) => {
@@ -15,9 +15,10 @@ export function UserProvider({ children }) {
       body: JSON.stringify(details),
     });
     const data = await response.json();
+    console.log(data);
 
     if (details.username === data.username) {
-      setUser({ username: data.username, id: data.id });
+      setUser({ username: data.username, userId: data.userId });
       return;
     } else if (details.username === "") {
       setError("Please enter your username");
@@ -29,7 +30,7 @@ export function UserProvider({ children }) {
   };
 
   const logout = () => {
-    setUser({ username: "", id: "" });
+    setUser({ username: "", userId: "" });
   };
 
   return (

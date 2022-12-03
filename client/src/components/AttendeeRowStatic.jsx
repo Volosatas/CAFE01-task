@@ -18,7 +18,7 @@ export function AttendeeRowStatic(props) {
         </Button>
         <Button
           variant="danger"
-          onClick={() => props.handleDeleteBtn(props.attendee.id)}
+          onClick={() => props.handleDeleteBtn(props.attendee.attendeeId)}
         >
           Del
         </Button>

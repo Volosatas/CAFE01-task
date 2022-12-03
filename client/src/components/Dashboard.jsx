@@ -13,7 +13,8 @@ export function Dashboard() {
 
   const [attendees, setAttendees] = useState([]);
   const [newAttendee, setNewAttendee] = useState({
-    id: uuid(),
+    attendeeId: uuid(),
+    userId: user.userId,
     firstName: "",
     lastName: "",
     age: "",
@@ -21,7 +22,8 @@ export function Dashboard() {
   });
   const [editedAttendeeId, setEditedAttendeeId] = useState(null);
   const [editFormData, setEditFormData] = useState({
-    id: "",
+    attendeeId: "",
+    userId: "",
     firstName: "",
     lastName: "",
     age: "",
@@ -31,13 +33,13 @@ export function Dashboard() {
   useEffect(() => {
     const fetchAttendees = async () => {
       const response = await fetch(
-        `http://localhost:3005/user/${user.id}/attendees`
+        `http://localhost:3005/${user.userId}/attendees`
       );
       const data = await response.json();
       setAttendees([...data]);
     };
     fetchAttendees();
-  }, [user.id]);
+  }, [user.userId]);
 
   const handleCreateFormInputChange = (e) => {
     const inputName = e.target.name;
@@ -52,7 +54,7 @@ export function Dashboard() {
     setAttendees([...attendees, newAttendee]);
 
     const postNewUser = async () => {
-      await fetch(`http://localhost:3005/user/${user.id}/attendees`, {
+      await fetch(`http://localhost:3005/${user.userId}/attendees`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -63,7 +65,8 @@ export function Dashboard() {
     postNewUser();
 
     setNewAttendee({
-      id: uuid(),
+      attendeeId: uuid(),
+      userId: user.userId,
       firstName: "",
       lastName: "",
       age: "",
@@ -72,7 +75,7 @@ export function Dashboard() {
   };
 
   const handleEditBtn = (editedAttendee) => {
-    setEditedAttendeeId(editedAttendee.id);
+    setEditedAttendeeId(editedAttendee.attendeeId);
     setEditFormData({ ...editedAttendee });
   };
 
@@ -88,42 +91,36 @@ export function Dashboard() {
 
     const newAttendees = [...attendees];
     const index = attendees.findIndex(
-      (attendee) => attendee.id === editFormData.id
+      (attendee) => attendee.attendeeId === editFormData.attendeeId
     );
 
     newAttendees[index] = { ...editFormData };
 
     setAttendees(newAttendees);
 
-    await fetch(
-      `http://localhost:3005/user/${user.id}/attendees/${editedAttendeeId}`,
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(editFormData),
-      }
-    );
+    await fetch(`http://localhost:3005/attendees/${editedAttendeeId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(editFormData),
+    });
 
     setEditedAttendeeId(null);
   };
 
   const handleDeleteBtn = async (attendeeId) => {
     const filteredAttendees = attendees.filter(
-      (attendee) => attendee.id !== attendeeId
+      (attendee) => attendee.attendeeId !== attendeeId
     );
     setAttendees(filteredAttendees);
 
-    await fetch(
-      `http://localhost:3005/user/${user.id}/attendees/${attendeeId}`,
-      {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    await fetch(`http://localhost:3005/attendees/${attendeeId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
   };
 
   const handleCancelBtn = () => {
