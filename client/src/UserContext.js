@@ -15,7 +15,6 @@ export function UserProvider({ children }) {
       body: JSON.stringify(details),
     });
     const data = await response.json();
-    console.log(data);
 
     if (details.username === data.username) {
       setUser({ username: data.username, userId: data.userId });
