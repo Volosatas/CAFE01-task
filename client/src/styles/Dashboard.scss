@@ -1,5 +1,30 @@
 .dashboard {
+  min-height: 100vh;
+  background: url(../images/dashboard.jpg);
+  background-attachment: fixed;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: right;
+
   &__body {
     display: flex;
+  }
+
+  &__noAttendees {
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+  }
+}
+
+@media only screen and (max-width: 1007px) {
+  .dashboard {
+    &__body {
+      flex-direction: column;
+    }
+
+    &__noAttendees {
+      margin-top: 75px;
+    }
   }
 }

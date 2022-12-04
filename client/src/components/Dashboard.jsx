@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Header } from "./Header";
 import { AttendeeCreator } from "./AttendeeCreator";
 import { AttendeeList } from "./AttendeeList";
-import { NoAttendees } from "./NoAttendees";
 import { useEffect } from "react";
 import { useContext } from "react";
 import { UserContext } from "../UserContext";
@@ -148,7 +147,9 @@ export function Dashboard() {
             handleEditSubmit={handleEditSubmit}
           />
         ) : (
-          <NoAttendees />
+          <div className="dashboard__noAttendees">
+            <h3>Add an attendee to display guest info</h3>
+          </div>
         )}
       </div>
     </div>

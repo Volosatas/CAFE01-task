@@ -1,21 +1,20 @@
 import Button from "react-bootstrap/Button";
 import { useContext } from "react";
 import { UserContext } from "../UserContext";
+import logo from "../images/logo.png";
 
 export function Header() {
   const { user, logout } = useContext(UserContext);
 
   return (
     <header className="header">
-      <div className="header__middle">
-        <h1 className="header__middle--title">
-          Welcome to your Management
-          <br /> Dashboard - {user.username}
-        </h1>
+      <p>Welcome, {user.username} !</p>
+      <img src={logo} alt="logo" className="header__logo" />
+      <div className="header__right">
+        <Button onClick={logout} variant="danger">
+          Log Out
+        </Button>
       </div>
-      <Button onClick={logout} variant="danger">
-        Log Out
-      </Button>
     </header>
   );
 }

@@ -1,5 +1,5 @@
 .creator {
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.7);
   display: flex;
   height: 400px;
   flex-direction: column;
@@ -15,6 +15,7 @@
   &__tittle {
     font-size: 24px;
     margin-bottom: 20px;
+    color: white;
   }
 
   &__form {
@@ -24,6 +25,19 @@
 
     &--button {
       max-width: 50%;
+    }
+  }
+}
+
+@media only screen and (max-width: 1007px) {
+  .creator {
+    height: auto;
+    top: 0;
+    margin: 10px auto;
+    width: 90%;
+
+    &__form {
+      flex-direction: row;
     }
   }
 }
