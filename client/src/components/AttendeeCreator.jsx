@@ -4,9 +4,7 @@ import Form from "react-bootstrap/Form";
 export function AttendeeCreator(props) {
   return (
     <div className="creator">
-      <div className="creator__tittle">
-        <h2>Create Attendee</h2>
-      </div>
+      <h2 className="creator__tittle">Add Attendee</h2>
       <form className="creator__form" onSubmit={props.handleCreateFormSubmit}>
         <Form.Control
           type="text"
@@ -40,8 +38,12 @@ export function AttendeeCreator(props) {
           value={props.newAttendee.email}
           onChange={(e) => props.handleCreateFormInputChange(e)}
         />
-        <Button variant="primary" type="submit">
-          Submit
+        <Button
+          className="creator__form--button"
+          variant="primary"
+          type="submit"
+        >
+          Add
         </Button>
       </form>
     </div>

@@ -130,25 +130,27 @@ export function Dashboard() {
   return (
     <div className="dashboard">
       <Header />
-      <AttendeeCreator
-        newAttendee={newAttendee}
-        handleCreateFormInputChange={handleCreateFormInputChange}
-        handleCreateFormSubmit={handleCreateFormSubmit}
-      />
-      {attendees.length > 0 ? (
-        <AttendeeList
-          attendees={attendees}
-          editedAttendeeId={editedAttendeeId}
-          editFormData={editFormData}
-          handleDeleteBtn={handleDeleteBtn}
-          handleCancelBtn={handleCancelBtn}
-          handleEditBtn={handleEditBtn}
-          handleEditInputChange={handleEditInputChange}
-          handleEditSubmit={handleEditSubmit}
+      <div className="dashboard__body">
+        <AttendeeCreator
+          newAttendee={newAttendee}
+          handleCreateFormInputChange={handleCreateFormInputChange}
+          handleCreateFormSubmit={handleCreateFormSubmit}
         />
-      ) : (
-        <NoAttendees />
-      )}
+        {attendees.length > 0 ? (
+          <AttendeeList
+            attendees={attendees}
+            editedAttendeeId={editedAttendeeId}
+            editFormData={editFormData}
+            handleDeleteBtn={handleDeleteBtn}
+            handleCancelBtn={handleCancelBtn}
+            handleEditBtn={handleEditBtn}
+            handleEditInputChange={handleEditInputChange}
+            handleEditSubmit={handleEditSubmit}
+          />
+        ) : (
+          <NoAttendees />
+        )}
+      </div>
     </div>
   );
 }

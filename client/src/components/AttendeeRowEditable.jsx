@@ -5,7 +5,7 @@ export function AttendeeRowEditable(props) {
   return (
     <tr>
       <td></td>
-      <td>
+      <td style={{ display: "flex", gap: "5px" }}>
         <Form.Control
           type="text"
           name="firstName"
@@ -39,7 +39,7 @@ export function AttendeeRowEditable(props) {
           onChange={(e) => props.handleEditInputChange(e)}
         />
       </td>
-      <td>
+      <td style={{ display: "flex", gap: "5px" }}>
         <Button type="submit" variant="warning">
           Save
         </Button>

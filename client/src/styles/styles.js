@@ -5,3 +5,4 @@ import "./AttendeeCreator.scss";
 import "./AttendeeList.scss";
 import "./NoAttendees.scss";
 import "./LoginScreen.scss";
+import "./Dashboard.scss";
