@@ -65,6 +65,10 @@ export function LoginScreen() {
             Login
           </Button>
         </Form>
+        <p style={{ fontSize: "7px", color: "white" }}>
+          For testing enter: <br /> testuser1 - password <br /> testuser2 -
+          password123
+        </p>
       </div>
       <div className="loginScreen__hero">
         <img src={logo} alt="logo" className="loginScreen__hero--logo" />
