@@ -5,7 +5,7 @@ export function AttendeeRowEditable(props) {
   return (
     <tr>
       <td></td>
-      <td style={{ display: "flex", gap: "5px" }}>
+      <td className="doubleRows__input">
         <Form.Control
           type="text"
           name="firstName"
@@ -39,12 +39,12 @@ export function AttendeeRowEditable(props) {
           onChange={(e) => props.handleEditInputChange(e)}
         />
       </td>
-      <td style={{ display: "flex", gap: "5px" }}>
+      <td className="doubleRows__button">
         <Button type="submit" variant="warning">
           Save
         </Button>
         <Button variant="danger" onClick={props.handleCancelBtn}>
-          Cancel
+          X
         </Button>
       </td>
     </tr>

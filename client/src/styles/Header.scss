@@ -26,3 +26,22 @@
     font-weight: 600;
   }
 }
+
+@media only screen and (max-width: 640px) {
+  .header {
+    height: 50px;
+
+    &__logo {
+      max-width: 70px;
+      padding-top: 20px;
+    }
+
+    &__right button {
+      font-size: 8px;
+    }
+
+    & p {
+      font-size: 14px;
+    }
+  }
+}

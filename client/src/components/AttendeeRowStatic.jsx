@@ -9,7 +9,7 @@ export function AttendeeRowStatic(props) {
       </td>
       <td>{props.attendee.age}</td>
       <td>{props.attendee.email}</td>
-      <td style={{ display: "flex", gap: "5px" }}>
+      <td className="doubleRows__button">
         <Button
           variant="primary"
           onClick={() => props.handleEditBtn(props.attendee)}

@@ -4,9 +4,10 @@ import Form from "react-bootstrap/Form";
 export function AttendeeCreator(props) {
   return (
     <div className="creator">
-      <h2 className="creator__tittle">Add Attendee</h2>
+      <h2 className="creator__title">Add Attendee</h2>
       <form className="creator__form" onSubmit={props.handleCreateFormSubmit}>
         <Form.Control
+          className="creator__form--input"
           type="text"
           name="firstName"
           placeholder="First Name"
@@ -15,6 +16,7 @@ export function AttendeeCreator(props) {
           onChange={(e) => props.handleCreateFormInputChange(e)}
         />
         <Form.Control
+          className="creator__form--input"
           type="text"
           name="lastName"
           placeholder="Last Name"
@@ -23,6 +25,7 @@ export function AttendeeCreator(props) {
           onChange={(e) => props.handleCreateFormInputChange(e)}
         />
         <Form.Control
+          className="creator__form--input"
           type="number"
           name="age"
           placeholder="Age"
@@ -31,6 +34,7 @@ export function AttendeeCreator(props) {
           onChange={(e) => props.handleCreateFormInputChange(e)}
         />
         <Form.Control
+          className="creator__form--input"
           type="email"
           name="email"
           placeholder="Email"
